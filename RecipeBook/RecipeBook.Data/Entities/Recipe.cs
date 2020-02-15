@@ -10,5 +10,6 @@ namespace RecipeBook.Data
         public string Title { get; set; }
         public ICollection<Ingredient> Ingredients { get; set; }
         public string Instruction { get; set; }
+        public DateTime DateOfCreation { get; set; }
     }
 }
