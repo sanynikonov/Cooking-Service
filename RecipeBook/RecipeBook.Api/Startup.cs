@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RecipeBook.Business;
 
 namespace RecipeBook.Api
 {
@@ -26,6 +27,9 @@ namespace RecipeBook.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            var connectionString = Configuration.GetConnectionString("RecipeBookDbConnection");
+            services.ConfigureBLL(connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +43,8 @@ namespace RecipeBook.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
