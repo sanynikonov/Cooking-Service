@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using RecipeBook.Business;
+using RecipeBook.Data;
 
 namespace RecipeBook.Api
 {
@@ -29,7 +30,13 @@ namespace RecipeBook.Api
             services.AddControllers();
 
             var connectionString = Configuration.GetConnectionString("RecipeBookDbConnection");
-            services.ConfigureBLL(connectionString);
+            services.AddDbContextPool<RecipeBookContext>(
+                options => options.UseSqlServer(connectionString));
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<RecipeBookContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

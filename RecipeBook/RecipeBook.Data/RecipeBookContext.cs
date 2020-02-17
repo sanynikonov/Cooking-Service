@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RecipeBook.Data
 {
-    internal class RecipeBookContext : IdentityDbContext<User, Role, int>
+    public class RecipeBookContext : IdentityDbContext<User, Role, int>
     {
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
