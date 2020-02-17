@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Data
 {
-    internal class RecipeRepository : IRecipeRepository
+    public class RecipeRepository : IRecipeRepository
     {
         private readonly RecipeBookContext context;
         private readonly DbSet<Recipe> recipes;

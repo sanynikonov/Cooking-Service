@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Data
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly RecipeBookContext context;
         private readonly DbSet<User> users;

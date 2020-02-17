@@ -7,18 +7,27 @@ namespace RecipeBook.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public IRecipeRepository RecipeRepository => throw new NotImplementedException();
+        private RecipeBookContext context;
 
-        public IUserRepository UserRepository => throw new NotImplementedException();
+        public UnitOfWork(IRecipeRepository recipeRepository, IUserRepository userRepository, RecipeBookContext context)
+        {
+            this.RecipeRepository = recipeRepository;
+            this.UserRepository = userRepository;
+            this.context = context;
+        }
+
+        public IRecipeRepository RecipeRepository { get; }
+
+        public IUserRepository UserRepository { get; }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            context.Dispose();
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return await context.SaveChangesAsync();
         }
     }
 }
