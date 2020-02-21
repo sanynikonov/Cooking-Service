@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Data
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IRecipeRepository RecipeRepository { get; }
         IUserRepository UserRepository { get; }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,13 +35,19 @@ namespace RecipeBook.Api
             services.AddDbContextPool<RecipeBookContext>(
                 options => options.UseSqlServer(connectionString));
 
+            var mapperConfig = new MapperConfiguration(c =>
+            {
+                c.AddProfile(new MapperConfigBLL());
+            });
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<RecipeBookContext>();
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IService, Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
