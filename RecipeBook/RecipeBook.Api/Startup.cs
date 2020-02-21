@@ -38,6 +38,7 @@ namespace RecipeBook.Api
             var mapperConfig = new MapperConfiguration(c =>
             {
                 c.AddProfile(new MapperConfigBLL());
+                c.AddProfile(new MapperConfigAPI());
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
