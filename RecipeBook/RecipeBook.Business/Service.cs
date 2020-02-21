@@ -1,28 +1,25 @@
-﻿using RecipeBook.Data;
+﻿using AutoMapper;
+using RecipeBook.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeBook.Business
 {
-    public class Service : IService
+    internal class Service : IDisposable
     {
-        private IUnitOfWork unitOfWork;
+        protected IMapper mapper;
+        protected IUnitOfWork unit;
 
-        public Service(IUnitOfWork unitOfWork)
+        public Service(IMapper mapper, IUnitOfWork unit)
         {
-            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
+            this.unit = unit;
         }
 
         public void Dispose()
         {
-            unitOfWork.Dispose();
-        }
-
-        public async Task Do()
-        {
-            await unitOfWork.RecipeRepository.GetAllAsync();
+            unit.Dispose();
         }
     }
 }
