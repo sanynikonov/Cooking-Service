@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RecipeBook.Business
 {
-    public class Service : IDisposable
+    public class Service
     {
         protected IMapper mapper;
         protected IUnitOfWork unit;
@@ -15,11 +15,6 @@ namespace RecipeBook.Business
         {
             this.mapper = mapper;
             this.unit = unit;
-        }
-
-        public void Dispose()
-        {
-            unit.Dispose();
         }
     }
 }

@@ -20,11 +20,6 @@ namespace RecipeBook.Data
 
         public IUserRepository UserRepository { get; }
 
-        public void Dispose()
-        {
-            context.Dispose();
-        }
-
         public async Task<int> SaveChangesAsync()
         {
             return await context.SaveChangesAsync();
