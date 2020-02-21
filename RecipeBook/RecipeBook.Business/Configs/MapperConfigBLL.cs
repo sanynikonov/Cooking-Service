@@ -19,8 +19,10 @@ namespace RecipeBook.Business
             CreateMap<IngredientDTO, Ingredient>()
                 .ForMember(p => p.Product, c => c.MapFrom(p => new Product { Name = p.Product }));
 
-            CreateMap<Recipe, RecipeDTO>();
-            CreateMap<RecipeDTO, Recipe>();
+            CreateMap<Recipe, RecipeDTO>()
+                .ForMember(p => p.Ingredients, c => c.Ignore());
+            CreateMap<RecipeDTO, Recipe>()
+                .ForMember(p => p.Ingredients, c => c.Ignore());
         }
     }
 }

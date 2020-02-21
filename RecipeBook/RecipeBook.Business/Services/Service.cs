@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RecipeBook.Business
 {
-    internal class Service : IDisposable
+    public class Service : IDisposable
     {
         protected IMapper mapper;
         protected IUnitOfWork unit;
